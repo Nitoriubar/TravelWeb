@@ -9,5 +9,6 @@ public class WebController {
 	@RequestMapping("/")
     public String hello() {
         return "Hello World!";
+        
     }
 }
