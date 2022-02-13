@@ -24,12 +24,11 @@ public class KakaoAPI {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
-			
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=5ab806b4b4849302b22b32cac3759635");
-			sb.append("&redirect_uri=http://localhost:8081/login");
+			sb.append("&redirect_uri=http://localhost:8081/TravelWeb/index.html");
 			sb.append("&code="+code);
 			
 			bw.write(sb.toString());

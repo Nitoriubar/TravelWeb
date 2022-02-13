@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,17 +10,21 @@
 </head>
 <body>
    <h1>Kakao Login</h1>
-    <!--로그인이 되어있지 않은 경우 -->
-	<span th:if="${userId==null}">
-		<a href="https://kauth.kakao.com/oauth/authorize?client_id=5ab806b4b4849302b22b32cac3759635&redirect_uri=http://localhost:8081/login&response_type=code">
-			<img src = "images/kakao_login_medium_narrow.png">
-		</a>
-	</span>
-	<!--로그인이 되어있는 경우 -->
-	<span th:if="${userId!=null}">
-		<form name="logout" action="http://localhost:8081/logout">
-			<input type="submit" value="로그아웃">
-		</form>
-	</span>
+    <!--로그인이 되어있지 않은 경우-->
+    <script th:inline=javascript>
+		<span th:if="${userId==null}">
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=5ab806b4b4849302b22b32cac3759635&redirect_uri=http://localhost:8081/TravelWeb/index.html&response_type=code">
+				<img src = "images/kakao_login_medium_narrow.png">
+			</a>
+		</span>
+	</script>
+	<!--로그인이 되어있는 경우-->
+	<script th:inline=javascript>
+		<span th:if="${userId!=null}">
+			<form name="logout" action="http://localhost:8081/logout">
+				<input type="submit" value="로그아웃">
+			</form>
+		</span>
+	</script>
 </body>
 </html>

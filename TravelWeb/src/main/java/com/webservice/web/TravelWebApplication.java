@@ -16,11 +16,8 @@ public class TravelWebApplication extends SpringBootServletInitializer{
 	}
 	
 	@Override
-	 
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
- 
-        return application.sources(TravelWebApplication.class);
- 
-    }
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(TravelWebApplication.class);
+	}
 
 }
