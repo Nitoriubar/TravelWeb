@@ -21,14 +21,15 @@ public class OAuth2UserInfoFactory {
 }
 
 
-
-//public class OAuth2UserInfoFactory {
-//	public static OAuth2UserInfo getOAuth2UserInfo(AuthProvider providerType, Map<String, Object> attributes) {
-//        switch (providerType) {
-//            case google: return new GoogleOAuth2UserInfo(attributes);
-//            case naver: return new NaverOAuth2UserInfo(attributes);
-//            case kakao: return new KakaoOAuth2UserInfo(attributes);
-//            default: throw new IllegalArgumentException("Invalid Provider Type.");
-//        }
-//    }
-//}
+/* 
+public class OAuth2UserInfoFactory {
+	public static OAuth2UserInfo getOAuth2UserInfo(AuthProvider providerType, Map<String, Object> attributes) {
+        switch (providerType) {
+            case google: return new GoogleOAuth2UserInfo(attributes);
+            case naver: return new NaverOAuth2UserInfo(attributes);
+            case kakao: return new KakaoOAuth2UserInfo(attributes);
+            default: throw new IllegalArgumentException("Invalid Provider Type.");
+        }
+    }
+}
+*/

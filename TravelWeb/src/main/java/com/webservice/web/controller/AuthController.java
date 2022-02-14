@@ -60,7 +60,7 @@ public class AuthController {
 	            throw new BadRequestException("Email address already in use.");
 	        }
 
-	        // Creating user's account
+	        // 사용자 계정 생성
 	        User user = new User();
 	        user.setName(signUpRequest.getName());
 	        user.setEmail(signUpRequest.getEmail());
