@@ -57,7 +57,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     //validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-	
+	// ConfigurationProperties »ç¿ë
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	compileOnly 'org.projectlombok:lombok'
 	// MySQL

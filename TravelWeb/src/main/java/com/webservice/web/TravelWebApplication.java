@@ -1,23 +1,22 @@
 package com.webservice.web;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+
+import com.webservice.web.config.properties.AppProperties;
+import com.webservice.web.config.properties.CorsProperties;
 
 @SpringBootApplication
-public class TravelWebApplication extends SpringBootServletInitializer{
+@EnableConfigurationProperties({
+    CorsProperties.class,
+    AppProperties.class
+})
+public class TravelWebApplication{
 
-	void contextLoads() {
-	}
-	
 	public static void main(String[] args) {
 		SpringApplication.run(TravelWebApplication.class, args);
-	}
-	
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(TravelWebApplication.class);
 	}
 
 }
