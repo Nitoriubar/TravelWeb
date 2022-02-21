@@ -42,6 +42,7 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	//jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -60,13 +61,14 @@ dependencies {
 	// ConfigurationProperties »ç¿ë
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	compileOnly 'org.projectlombok:lombok'
+	//lombok
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
 	// MySQL
-    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'mysql:mysql-connector-java'
 	//JSON String -> Java Object
 	implementation 'com.google.code.gson:gson:2.8.7'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

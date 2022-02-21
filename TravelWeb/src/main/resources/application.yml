@@ -3,18 +3,23 @@ logging:
     org:
       springframework:
         web: debug
+
 server:
   port: 8081
 spring:
-    profiles.active: local
-    main: 
-      web-application-type: none
-    h2:
-      console:
-        enabled: true
-        path: /console
-      thymeleaf:
-        cache: false
+    datasource:
+        url: jdbc:mysql://localhost:3306/TravelWeb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+        username: root
+        password: gu429H310!
+
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     # Security
     security:
       oauth2:
@@ -34,42 +39,20 @@ spring:
               tokenUri: https://kauth.kakao.com/oauth/token
               userInfoUri: https://kapi.kakao.com/v2/user/me
               userNameAttribute: id
-# cors 설정
-cors:
-  allowed-origins: 'http://localhost:3000'
-  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
-  allowed-headers: '*'
-  max-age: 3600
-  
-# jwt secret key 설정
-jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
-
-# 토큰 관련 secret Key 및 RedirectUri 설정
+    thymeleaf:
+        cache: false
+        check-template-location: true
+        mode: HTML5
+        order: 0
+        prefix: classpath:/templates/
+        suffix: .jsp
 app:
   auth:
-    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpiry: 1800000
-    refreshTokenExpiry: 604800000
+    tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
+    tokenExpirationMsec: 864000000
+  cors:
+    allowedOrigins: http://localhost:3000,http://localhost:8081
   oauth2:
     authorizedRedirectUris:
-      - http://localhost:3000/kakaologin 
-#app:
-#  auth:
-#    tokenSecret: mzsZqLewrgPPBzlDuz8bqLRe62jQ7aFX
-#    tokenExpirationMsec: 864000000
-#    refreshTokenExpiry: 604800000
-#  cors:
-#      allowed-origins: 'http://localhost:8081'
-#      allowed-methods: GET,POST,PUT,DELETE,OPTIONS
-#      allowed-headers: '*'
-#      max-age: 3600
-#  oauth2:
-#      authorizedRedirectUris:
-#          - http://localhost:8081/oauth/redirect
-#  thymeleaf:
-#    cache: false
-#    check-template-location: true
-#    mode: HTML5
-#    order: 0
-#    prefix: classpath:templates/
-#    suffix: .html
+      - http://localhost:3000/kakaologin
+
