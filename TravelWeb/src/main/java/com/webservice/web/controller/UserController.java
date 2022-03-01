@@ -11,18 +11,13 @@ import com.webservice.web.repository.UserRepository;
 import com.webservice.web.security.CurrentUser;
 import com.webservice.web.security.UserPrincipal;
 
-@RestController //사용자가 요청 -> 응답(data) @Controller는 사용자가 요청하면 응답을 html파일로 함.
+@RestController
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-    
-//    @GetMapping("/http/get") // http/get
-//    public String getTest() {
-//    	return "get요청";
-//    }
 
-    @GetMapping("/user/me") //
+    @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
         return userRepository.findById(userPrincipal.getId())

@@ -17,8 +17,11 @@ public class User {
 
     @Column(nullable = false)
     private String name;
+    
+    @Enumerated(EnumType.STRING)
+	private Role role; // ADMIN, USER, GUEST ±¸º°
 
-    @Email
+	@Email
     @Column(nullable = false)
     private String email;
 
@@ -99,4 +102,12 @@ public class User {
     public void setProviderId(String providerId) {
         this.providerId = providerId;
     }
+    
+    public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 }

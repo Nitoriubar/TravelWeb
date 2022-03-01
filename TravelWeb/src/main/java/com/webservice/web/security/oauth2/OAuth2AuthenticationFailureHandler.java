@@ -16,7 +16,6 @@ import java.io.IOException;
 
 import static com.webservice.web.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
-//인증이 실패한 경우, 들어온 uri정보에 token정보 대신 error정보를 추가해 redirect
 @Component
 public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 

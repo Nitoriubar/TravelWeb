@@ -17,7 +17,9 @@ import org.springframework.security.oauth2.client.web.AuthorizationRequestReposi
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.webservice.web.security.*;
+import com.webservice.web.security.CustomUserDetailsService;
+import com.webservice.web.security.RestAuthenticationEntryPoint;
+import com.webservice.web.security.TokenAuthenticationFilter;
 import com.webservice.web.security.oauth2.CustomOAuth2UserService;
 import com.webservice.web.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.webservice.web.security.oauth2.OAuth2AuthenticationFailureHandler;
@@ -117,11 +119,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .oauth2Login()
                     .authorizationEndpoint()
-                        .baseUri("/oauth2/authorize") //프론트엔드에서 서버로 인증 요청할 때 이동할 uri
+                        .baseUri("/oauth2/authorize")
                         .authorizationRequestRepository(cookieAuthorizationRequestRepository())
                         .and()
                     .redirectionEndpoint()
-                        .baseUri("/oauth2/callback/*") //어플리케이션 설정에서 정해주었던 callback uri
+                        .baseUri("/oauth2/callback/*")
                         .and()
                     .userInfoEndpoint()
                         .userService(customOAuth2UserService)
@@ -129,6 +131,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .successHandler(oAuth2AuthenticationSuccessHandler)
                     .failureHandler(oAuth2AuthenticationFailureHandler);
 
+        
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
