@@ -11,7 +11,9 @@ spring:
         url: jdbc:mysql://localhost:3306/TravelWeb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
         username: root
         password: gu429H310!
-
+        mybatis:
+            mapper-locations: classpath*:**/mapper/*.xml
+        
     jpa:
         show-sql: true
         hibernate:
