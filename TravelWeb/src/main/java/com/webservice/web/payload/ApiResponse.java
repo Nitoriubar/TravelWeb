@@ -1,5 +1,7 @@
 package com.webservice.web.payload;
 
+
+// TODO: 기형님 어제 옥타곤에서 본거 같아요 
 public class ApiResponse {
     private boolean success;
     private String message;
