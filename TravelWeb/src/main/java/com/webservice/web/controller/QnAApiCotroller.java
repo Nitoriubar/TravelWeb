@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.webservice.web.payload.QnASaveRequest;
 import com.webservice.web.payload.QnAUpdateRequest;
-import com.webservice.web.security.QnAService;
 import com.webservice.web.security.UserPrincipal;
+import com.webservice.web.service.QnAService;
 
 @RequiredArgsConstructor
 @RestController

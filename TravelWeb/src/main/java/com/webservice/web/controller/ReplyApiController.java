@@ -5,8 +5,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.webservice.web.model.Reply;
-import com.webservice.web.security.ReplyService;
 import com.webservice.web.security.UserPrincipal;
+import com.webservice.web.service.ReplyService;
 
 @RequiredArgsConstructor
 @RestController
