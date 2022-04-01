@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +14,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.webservice.web.exception.FileTransferFailedException;
 import com.webservice.web.model.Hashtag;
 import com.webservice.web.model.MakerImage;
 import com.webservice.web.model.Post;
 import com.webservice.web.model.User;
 import com.webservice.web.repository.HashtagRepository;
+import com.webservice.web.repository.MakerImageRepository;
 import com.webservice.web.repository.PostRepository;
 
 @Service
 public class PostService implements PostServiceItf{
+	private static final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
+	
 	@Autowired
 	private Environment environment;
 	
 	@Autowired
 	private PostRepository postRepository;
+	
+	@Autowired
+	private MakerImageRepository makerImageRepository;
 	
 	@Autowired
 	private HashtagRepository hashtagRepository;
@@ -37,23 +45,23 @@ public class PostService implements PostServiceItf{
 		
 		String webAppHome = environment.getProperty("fileupload-localDir");
 		String imagePath = environment.getProperty("fileupload-image-path");
-		String postImageUploadFolder = environment.getProperty("fileupload-post-path");
+		String makerImageUploadFolder = environment.getProperty("fileupload-post-path");
 		
 		/* Post Insert */
-		post.setMemberId(writer.getId());
+		post.setWriter(writer.getId());
 		postRepository.insert(post);
 		
 		/* PostImage Create */
 		int postNo = postRepository.getCurrentPostNo();
-		File postImageFile = new File(webAppHome + imagePath + postImageUploadFolder + "/" + postNo + "/" + files.getOriginalFilename()); 
-		MakerImage postImage = new MakerImage();
-		postImage.setPath(imagePath + postImageUploadFolder + "/" + postNo);
-		postImage.setName(FilenameUtils.getBaseName(postImageFile.getName()));
-		postImage.setExtension(FilenameUtils.getExtension(files.getOriginalFilename()));
-		postImage.setPostNo(postNo);
+		File makerImageFile = new File(webAppHome + imagePath + makerImageUploadFolder + "/" + postNo + "/" + files.getOriginalFilename()); 
+		MakerImage makerImage = new MakerImage();
+		makerImage.setPath(imagePath + makerImageUploadFolder + "/" + postNo);
+		makerImage.setName(FilenameUtils.getBaseName(makerImageFile.getName()));
+		makerImage.setExtension(FilenameUtils.getExtension(files.getOriginalFilename()));
+		makerImage.setPostNo(postNo);
 		
 		/* Maker Image Insert */
-//		MakerImageRepository.insert(makerImage);
+		makerImageRepository.insert(makerImage);
 		
 		/* Hashtag Insert */
 		List<Hashtag> hashtags = post.getHashtags();
@@ -62,9 +70,9 @@ public class PostService implements PostServiceItf{
 		}
 		hashtagRepository.insert(hashtags);
 		
-		/* PostImageFile Transfer */
+		/* MakerImageFile Transfer */
 		try {
-			files.transferTo(postImageFile);
+			files.transferTo(makerImageFile);
 		}catch (Exception e) {
 			throw new FileTransferFailedException(e);
 		}
@@ -72,7 +80,7 @@ public class PostService implements PostServiceItf{
 
 	@Override
 	public void updatePost(User writer, Post post) {
-		post.setMemberNo(writer.getId());
+		post.setWriter(writer.getId());
 		postRepository.update(post);
 		
 		hashtagRepository.deleteAllByPostNo(post.getNo());
@@ -86,6 +94,7 @@ public class PostService implements PostServiceItf{
 	@Override
 	public void deletePost(int postNumber) {
 		hashtagRepository.deleteAllByPostNo(postNumber);
+		makerImageRepository.deleteByPostNo(postNumber);
 		postRepository.updateDeleted(postNumber);
 	}
 

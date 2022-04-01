@@ -15,7 +15,7 @@ public class Post{
     private String title;
     private Timestamp createdDate;
     private Timestamp updatedDate;
-    private User writer;
+    private long writer;
 //    private MakerImage markerImage;
     private var marker_img_path;
     private int marker_img_size;

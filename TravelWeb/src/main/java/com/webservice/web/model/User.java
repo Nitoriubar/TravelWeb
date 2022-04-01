@@ -11,7 +11,10 @@ import javax.validation.constraints.NotNull;
         @UniqueConstraint(columnNames = "email")
 })
 public class User {
-    @Id
+	
+	private int no;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,6 +41,14 @@ public class User {
     private AuthProvider provider;
 
     private String providerId;
+    
+    public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
 
     public Long getId() {
         return id;

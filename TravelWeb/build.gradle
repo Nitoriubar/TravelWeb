@@ -69,6 +69,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 	// MySQL
     implementation 'mysql:mysql-connector-java'
+    //common-io
+    implementation 'commons-io:commons-io:2.6'
 	//JSON String -> Java Object
 	implementation 'com.google.code.gson:gson:2.8.7'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
